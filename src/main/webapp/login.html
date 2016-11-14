@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Services</title>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+<title>Market Place</title>
+
+<style>
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+</style>
+</head>
+<body class="container">
+
+
+	<div class="container-fluid text-center" ng-app="marketLogin" ng-controller="loginController">
+		<div class="row content">
+		<div class="col-sm-12 ">
+			<h1>Welcome to UBS MarketPlace</h1>
+		</div>
+		</div>
+		<div class="row content">
+			<div class="col-sm-4 "></div>
+			<div class="col-sm-4 ">
+				<form role="form">
+					<div class="form-group">
+						<label for="email">Email address</label> <input type="email"
+							class="form-control" ng-model="emailId" placeholder="Enter email" />
+					</div>
+					<div class="form-group">
+						<label for="password">Password</label> <input type="password"
+							class="form-control" ng-model="password" placeholder="Password" />
+					</div>
+					<button class="btn btn-default" ng-click="loginValidate()">Submit</button>
+				</form>
+			</div>
+			<div class="col-sm-4 ">
+			<p>{{email}}</p>
+			<p>{{password}}</p>
+			</div>
+		</div>
+	</div>
+
+	<footer class="container-fluid text-center footer">
+		<p>Footer Text</p>
+	</footer>
+
+</body>
+
+<script>
+var login = angular.module("marketLogin",[]);
+login.controller("loginController",function($scope){
+	console.log("log...");	$scope.loginValidate =function(){
+		console.log("dumb");
+		if($scope.emailId=="1@2.3" && $scope.password=="xxx"){
+			console.log("Login Success full");
+			 <div ng-view></div>
+		}else{
+			console.log("Login FAIL" + $scope.emailId + " : "+ $scope.password);
+		}
+	};
+	
+});
+
+
+</script>
+
+</html>
+

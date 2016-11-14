@@ -1,0 +1,137 @@
+<html>
+     <title>Market</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <head>
+      <title>Angular JS Views</title>
+      <script src="js/angular.min.js"></script>
+      <script src="js/angular-route.min.js"></script>
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/market.css">
+ 	  
+   </head>
+
+</head>
+<body >
+<div ng-app ="mainApp" ng-controller="rootController">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#" ng-click="getUsers()">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" ng-click="toggleModal()" ><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
+   <!-- Modal ------------------------------------------------------------------->
+  <div class="modal fade" id="myModal" role="dialog" visible={{showLogin}}>
+    <div class="modal-dialog"> 
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <form role="form">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" />
+      </div>
+      <button type="submit" class="btn btn-default" ng-click="loginValidate()">Submit</button>
+    </form>
+      </div>
+      
+    </div>
+  </div>
+  <!-- Modal END ------------------------------------------------------------------->
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+    </div>
+    <div class="col-sm-8 text-left">
+      <h1>Welcome</h1>
+      <p>random text fill this place random text fill this place random text fill this place random text fill this place random text fill this place random text fill this place random text fill this place random text fill this place random text fill this place random text fill this place random text fill this place random text fill this place random text fill this place .</p>
+      <hr>
+      <h3>Test USer list </h3>
+    <div ng-show ="showTable">
+     <table >
+     
+     <tr><th>Email</th> <th>Name</th> <th>Role</th></tr>
+     <tr ng-repeat ="user in users">
+     <td>{{user.emailId}}</td> <td>{{user.name}}</td><td>{{user.role}}</td>
+     </tr>
+     
+     </table>
+     </div>
+    </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>Graph 1</p>
+      </div>
+      <div class="well">
+        <p>Graph 2</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer>
+ <script>
+ 
+ var mainApp = angular.module("mainApp", []);
+ 
+ 
+ mainApp.controller('rootController',function($scope,$http){
+	 	$scope.showTable = false;
+	    $scope.showModal = false;
+	    $scope.showLogin = false;
+	    console.log("Show Modal :" +$scope.showModal);
+	    $scope.toggleModal = function(){
+	    	console.log("toggle Model");
+	        $scope.showModal = !$scope.showModal;
+	        $scope.showLogin        = !$scope.showLogin;
+	        console.log("toggle Login" + $scope.showLogin);
+	    };
+	    $scope.loginValidate = function(){
+	    	console.log("LOgin Attemopt");
+	    };
+	    $scope.getUsers= function(){
+	    	console.log("populating users");
+	    	$scope.showTable= true;
+	    var url = "data/loginInfo.dat";
+        $http.get(url).success( function(response) {
+           $scope.users = response;
+        });
+	    };
+ });
+ 
+ </script>
+ </div>
+</body>   
+</html>

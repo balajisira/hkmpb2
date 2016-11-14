@@ -1,0 +1,21 @@
+[
+	{
+		"emailId" : "client@me.com",
+		"name" : "Client_1",
+		"password" : "123",
+		"role" : "client"
+	},
+		{
+		"emailId":"user@me.com",
+		"name" : "Client_2",
+		"password":"123",
+		"role":"user"
+	},
+		{
+		"emailId":"manager@me.com",
+		"name" : "Client_3",
+		"password":"123",
+		"role":"wealthManager"
+	}
+	
+]
