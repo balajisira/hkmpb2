@@ -5,10 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonReader;
 
 import com.market.wm.domain.User;
 
@@ -17,7 +20,7 @@ public class UserDao {
 		List<User> userList = null;
 		try {
 			// File file = new File("hkmpb2/data/loginInfo.dat");
-			File file = new File("C:/Dev/workSpace/tool/hkmpb2/src/main/webapp/data/loginInfoXml.dat");
+			File file = new File("C:/Dev/workSpace/tool/hkmpb2/src/main/webapp/data/loginInfo.dat");
 			
 			if (!file.exists()) {
 				System.out.println("File does not  exists" + file.getAbsolutePath());
@@ -28,16 +31,17 @@ public class UserDao {
 			} else {
 				System.out.println("File exists");
 				FileInputStream fis = new FileInputStream(file);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				System.out.println(" Object Input Stream :" + ois);
-				userList = (List<User>) ois.readObject();
-				System.out.println("USER list:" + userList);
-				ois.close();
+				
+				JsonReader jsonReader;
+				System.out.println("File exists :" + file.exists());
+				jsonReader = Json.createReader(new FileInputStream(file));
+				
+				JsonArray objectArray = jsonReader.readArray();
+				System.out.println(objectArray);
+				jsonReader.close();
+				userList = Json2ObjectAdapter.convertToUserArray(objectArray);
 			}
 		} catch (IOException e) {
-			System.out.println("Exception :" + e.getMessage());
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
 			System.out.println("Exception :" + e.getMessage());
 			e.printStackTrace();
 		}
