@@ -52,7 +52,7 @@
         <form role="form">
       <div class="form-group">
         <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email" />
+        <input type="email" class="form-control" ng-model="email" placeholder="Enter email" />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -118,8 +118,13 @@
 	        $scope.showLogin        = !$scope.showLogin;
 	        console.log("toggle Login" + $scope.showLogin);
 	    };
-	    $scope.loginValidate = function(){
+	    $scope.loginValidate = function($scope){
 	    	console.log("LOgin Attemopt");
+		    $http({
+		        url: 'rest/AuthService/do',
+		        method: "POST",
+		        data: { 'emailId' : "test@me.com" }
+		    }).then(function(response) {console.log("Success");}, function(response) { console.log("optional");});
 	    };
 	    $scope.getUsers= function(){
 	    	console.log("populating users");
